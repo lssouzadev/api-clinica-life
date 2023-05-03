@@ -18,7 +18,7 @@ export class GetProfessionalAppointmentsUseCase {
     professionalId,
   }: GetProfessionalAppointmentsUseCaseRequest): Promise<GetProfessionalAppointmentsUseCaseResponse> {
     const appointments =
-      await this.appointmentsRepository.findAppointmentsByProfessionalIdAndDate(
+      await this.appointmentsRepository.findManyAppointmentsByProfessionalIdAndDate(
         professionalId,
         date,
       )

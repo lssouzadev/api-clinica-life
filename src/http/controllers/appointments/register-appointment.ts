@@ -13,11 +13,11 @@ export async function appointment(
     dateHour: z.string(),
     professionalId: z.string(),
     patientId: z.string(),
+    roomId: z.string(),
   })
 
-  const { dateHour, professionalId, patientId } = appointmentBodySchema.parse(
-    request.body,
-  )
+  const { dateHour, professionalId, patientId, roomId } =
+    appointmentBodySchema.parse(request.body)
 
   try {
     const registerAppointmentUseCase = makeRegisterAppointmentUseCase()
@@ -26,6 +26,7 @@ export async function appointment(
       dateHour: new Date(dateHour),
       professionalId,
       patientId,
+      roomId,
     })
   } catch (err) {
     if (err instanceof AppointmentAlreadyExistsError) {

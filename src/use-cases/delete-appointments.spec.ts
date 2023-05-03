@@ -17,6 +17,7 @@ describe('Delete Appointment Use Case', () => {
       date_hour: new Date(),
       professional_id: 'prof-01',
       patient_id: 'patient-01',
+      room_id: 'room-01',
     })
 
     await appointmentsRepository.create({
@@ -24,6 +25,7 @@ describe('Delete Appointment Use Case', () => {
       date_hour: new Date(),
       professional_id: 'prof-01',
       patient_id: 'patient-01',
+      room_id: 'room-01',
     })
 
     await sut.execute({

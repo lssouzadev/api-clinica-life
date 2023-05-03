@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { makeRegisterProfessionalUseCase } from '../../use-cases/factories/make-register-professional-use-case'
+import { makeRegisterProfessionalUseCase } from '@/use-cases/factories/make-register-professional-use-case'
 
 export async function registerProfessional(
   request: FastifyRequest,
@@ -8,12 +8,13 @@ export async function registerProfessional(
 ) {
   const registerProfessionalBodySchema = z.object({
     name: z.string(),
+    cpf: z.string(),
     specialty: z.string(),
     phone: z.string(),
     clinicId: z.string(),
   })
 
-  const { name, specialty, phone, clinicId } =
+  const { name, specialty, phone, clinicId, cpf } =
     registerProfessionalBodySchema.parse(request.body)
 
   try {
@@ -21,6 +22,7 @@ export async function registerProfessional(
 
     await registerProfessionalUseCase.execute({
       name,
+      cpf,
       specialty,
       phone,
       clinicId,
