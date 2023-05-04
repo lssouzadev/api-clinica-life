@@ -9,8 +9,8 @@
 - [x] deve ser possível cadastrar um profissional;
 - [x] deve ser possível excluir o cadastro de um profissional;
 - [x] deve ser possível obter os agendamentos por profissional;
-- [ ] deve ser possível obter os agendamentos por data;
-- [ ] deve ser possível obter o histórico de atendimentos do paciente;
+- [x] deve ser possível obter os agendamentos por data;
+- [x] deve ser possível obter o histórico de atendimentos do paciente;
 - [ ] deve ser possível filtrar os agendamentos por sala;
 - [ ] deve ser possível cadastrar procedimentos;
 - [ ] deve ser possível cadastrar atendimentos;
@@ -24,9 +24,9 @@
 - [x] o usuário não deve poder cadastrar dois agendamentos no mesmo horário para o mesmo dentista;
 - [x] o usuário não deve poder cadastrar um agendamento em uma sala onde o profissional não é cadastrado;
 - [x] o usuário não deve poder cadastrar um novo profissional com o mesmo cpf;
-- [ ] o usuário não deve poder cadastrar um novo paciente com o mesmo cpf;
-- [ ] o profissional deve poder acessar os seus agendamentos;
-- [ ] o profissional não deve poder acessar outros agendamentos que não sejam os seus;
+- [x] o usuário não deve poder cadastrar um novo paciente com o mesmo cpf;
+- [x] o profissional deve poder acessar os seus agendamentos;
+- [x] o profissional não deve poder acessar outros agendamentos que não sejam os seus;
 
 ## RNFs (Requisitos não-funcionais)
 

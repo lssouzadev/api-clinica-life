@@ -1,6 +1,6 @@
 import { Patient } from '@prisma/client'
-import { PatientsRepository } from '../repositories/patients-repository'
-import { PatientAlreadyExistsError } from './errors/patient-already-exists-error'
+import { PatientsRepository } from '@/repositories/patients-repository'
+import { PatientAlreadyExistsError } from '../@errors/patient-already-exists-error'
 
 interface RegisterPatientUseCaseRequest {
   name: string

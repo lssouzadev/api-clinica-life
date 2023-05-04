@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { makeRegisterProfessionalUseCase } from '@/use-cases/factories/make-register-professional-use-case'
+import { makeRegisterProfessionalUseCase } from '@/use-cases/@factories/make-register-professional-use-case'
 
 export async function registerProfessional(
   request: FastifyRequest,

@@ -1,6 +1,6 @@
 import { ProfessionalRoomsRepository } from '@/repositories/professional-rooms-repository'
 import { ProfessionalRoom } from '@prisma/client'
-import { ProfessionalAlreadyRegisteredInThisRoomError } from './errors/professional-already-registered-in-this-room-error'
+import { ProfessionalAlreadyRegisteredInThisRoomError } from '../@errors/professional-already-registered-in-this-room-error'
 
 interface CreateProfessionalRoomUseCaseRequest {
   professionalId: string

@@ -102,4 +102,12 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
 
     return appointments
   }
+
+  async findManyAppointmentsByPatientId(patientId: string) {
+    const appointments = this.items.filter(
+      (item) => item.patient_id === patientId,
+    )
+
+    return appointments
+  }
 }

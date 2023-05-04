@@ -1,6 +1,6 @@
 import { Professional } from '@prisma/client'
-import { ProfessionalsRepository } from '../repositories/professionals-repository'
-import { ProfessionalAlreadyExistsError } from './errors/professional-already-exists-error'
+import { ProfessionalsRepository } from '@/repositories/professionals-repository'
+import { ProfessionalAlreadyExistsError } from '../@errors/professional-already-exists-error'
 import { hash } from 'bcryptjs'
 
 interface RegisterProfessionalUseCaseRequest {

@@ -1,7 +1,7 @@
 import { InMemoryPatientsRepository } from '@/repositories/in-memory/in-memory-patients-repository'
 import { RegisterPatientUseCase } from './register-patient'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { PatientAlreadyExistsError } from './errors/patient-already-exists-error'
+import { PatientAlreadyExistsError } from '../@errors/patient-already-exists-error'
 
 let patientsRepository: InMemoryPatientsRepository
 let sut: RegisterPatientUseCase

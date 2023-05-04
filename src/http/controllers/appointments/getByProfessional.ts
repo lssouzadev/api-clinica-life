@@ -1,4 +1,4 @@
-import { makeGetProfessionalAppointmentsUseCase } from '@/use-cases/factories/make-get-professional-appointments-use-case'
+import { makeGetProfessionalAppointmentsUseCase } from '@/use-cases/@factories/make-get-professional-appointments-use-case'
 
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'

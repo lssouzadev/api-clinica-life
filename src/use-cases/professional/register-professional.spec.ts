@@ -1,7 +1,7 @@
 import { InMemoryProfessionalsRepository } from '@/repositories/in-memory/in-memory-professionals-repository'
 import { RegisterProfessionalUseCase } from './register-professional'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { ProfessionalAlreadyExistsError } from './errors/professional-already-exists-error'
+import { ProfessionalAlreadyExistsError } from '../@errors/professional-already-exists-error'
 
 let professionalsRepository: InMemoryProfessionalsRepository
 let sut: RegisterProfessionalUseCase

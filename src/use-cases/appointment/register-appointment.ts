@@ -3,12 +3,12 @@ import { Appointment } from '@prisma/client'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
-import { OutOfOfficeHoursError } from './errors/ out-of-office-hours-error'
-import { InvalidAppointmentTimeError } from './errors/invalid-appointment-time-error'
-import { AppointmentAlreadyExistsError } from './errors/appointment-already-exists-error'
-import { ProfessionalUnavailableError } from './errors/professional-unavailable-error'
+import { OutOfOfficeHoursError } from '../@errors/ out-of-office-hours-error'
+import { InvalidAppointmentTimeError } from '../@errors/invalid-appointment-time-error'
+import { AppointmentAlreadyExistsError } from '../@errors/appointment-already-exists-error'
+import { ProfessionalUnavailableError } from '../@errors/professional-unavailable-error'
 import { ProfessionalRoomsRepository } from '@/repositories/professional-rooms-repository'
-import { ProfessionalNotAllowedError } from './errors/professional-not-allowed-error'
+import { ProfessionalNotAllowedError } from '../@errors/professional-not-allowed-error'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)

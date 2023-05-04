@@ -1,9 +1,9 @@
-import { makeRegisterAppointmentUseCase } from '@/use-cases/factories/make-register-appointment-use-case'
+import { makeRegisterAppointmentUseCase } from '@/use-cases/@factories/make-register-appointment-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { AppointmentAlreadyExistsError } from '@/use-cases/errors/appointment-already-exists-error'
-import { OutOfOfficeHoursError } from '@/use-cases/errors/ out-of-office-hours-error'
-import { InvalidAppointmentTimeError } from '@/use-cases/errors/invalid-appointment-time-error'
+import { AppointmentAlreadyExistsError } from '@/use-cases/@errors/appointment-already-exists-error'
+import { OutOfOfficeHoursError } from '@/use-cases/@errors/ out-of-office-hours-error'
+import { InvalidAppointmentTimeError } from '@/use-cases/@errors/invalid-appointment-time-error'
 
 export async function appointment(
   request: FastifyRequest,

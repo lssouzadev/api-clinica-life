@@ -1,6 +1,6 @@
 import { ProfessionalsRepository } from '@/repositories/professionals-repository'
 import { Professional } from '@prisma/client'
-import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { InvalidCredentialsError } from '../@errors/invalid-credentials-error'
 import { compare } from 'bcryptjs'
 
 interface AuthenticateProfessionalUseCaseRequest {

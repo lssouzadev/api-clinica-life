@@ -1,10 +1,10 @@
 import { InMemoryAppointmentsRepository } from '@/repositories/in-memory/in-memory-appointments-repository'
 import { RegisterAppointmentUseCase } from './register-appointment'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InvalidAppointmentTimeError } from './errors/invalid-appointment-time-error'
-import { AppointmentAlreadyExistsError } from './errors/appointment-already-exists-error'
-import { OutOfOfficeHoursError } from './errors/ out-of-office-hours-error'
-import { ProfessionalUnavailableError } from './errors/professional-unavailable-error'
+import { InvalidAppointmentTimeError } from '../@errors/invalid-appointment-time-error'
+import { AppointmentAlreadyExistsError } from '../@errors/appointment-already-exists-error'
+import { OutOfOfficeHoursError } from '../@errors/ out-of-office-hours-error'
+import { ProfessionalUnavailableError } from '../@errors/professional-unavailable-error'
 import { InMemoryProfessionalRoomsRepository } from '@/repositories/in-memory/in-memory-professional-rooms-repository'
 
 let professionalRoomsRepository: InMemoryProfessionalRoomsRepository

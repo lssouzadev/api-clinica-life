@@ -1,5 +1,5 @@
 import { Clinic } from '@prisma/client'
-import { ClinicsRepository } from '../repositories/clinics-repository'
+import { ClinicsRepository } from '@/repositories/clinics-repository'
 
 interface RegisterClinicUseCaseRequest {
   name: string

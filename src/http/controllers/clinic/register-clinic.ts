@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { makeRegisterClinicUseCase } from '@/use-cases/factories/make-register-clinic-use-case'
+import { makeRegisterClinicUseCase } from '@/use-cases/@factories/make-register-clinic-use-case'
 
 export async function registerClinic(
   request: FastifyRequest,

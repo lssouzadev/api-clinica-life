@@ -16,4 +16,5 @@ export interface AppointmentsRepository {
     date: Date,
   ): Promise<Appointment | null>
   findManyAppointmentsByDate(date: Date): Promise<Appointment[]>
+  findManyAppointmentsByPatientId(patientId: string): Promise<Appointment[]>
 }
