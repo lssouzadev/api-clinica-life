@@ -59,6 +59,8 @@ model Room {
 model Professional {
   id                String             @id @default(uuid())
   name              String
+  email             String             @unique
+  password_hash     String
   cpf               String             @unique
   specialty         String
   phone             String

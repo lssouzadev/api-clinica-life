@@ -10,6 +10,8 @@ export class InMemoryProfessionalsRepository
     const professional = {
       id: data.id ?? randomUUID(),
       name: data.name,
+      email: data.email,
+      password_hash: data.password_hash,
       cpf: data.cpf,
       avatar: data.avatar ?? null,
       specialty: data.specialty,
@@ -24,6 +26,16 @@ export class InMemoryProfessionalsRepository
 
   async findByCpf(cpf: string) {
     const professional = this.items.find((item) => item.cpf === cpf)
+
+    if (!professional) {
+      return null
+    }
+
+    return professional
+  }
+
+  async findByEmail(email: string) {
+    const professional = this.items.find((item) => item.email === email)
 
     if (!professional) {
       return null

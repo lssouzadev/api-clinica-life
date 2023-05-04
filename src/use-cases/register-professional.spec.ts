@@ -15,6 +15,8 @@ describe('Register Professional Use Case', () => {
   it('should be able to register a Professional', async () => {
     const { professional } = await sut.execute({
       name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
       cpf: '11122233345',
       specialty: 'cirurgião dentista',
       phone: '1199999999',
@@ -27,6 +29,8 @@ describe('Register Professional Use Case', () => {
   it('should not be able to register a professional with same cpf twice', async () => {
     await sut.execute({
       name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
       cpf: '11122233345',
       specialty: 'cirurgião dentista',
       phone: '1199999999',
@@ -36,6 +40,8 @@ describe('Register Professional Use Case', () => {
     await expect(() =>
       sut.execute({
         name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '123456',
         cpf: '11122233345',
         specialty: 'cirurgião dentista',
         phone: '1199999999',

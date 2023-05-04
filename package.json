@@ -10,13 +10,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui" 
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@rocketseat/eslint-config": "1.2.0",
+    "@types/bcryptjs": "2.4.2",
     "@types/node": "18.15.11",
     "eslint": "8.38.0",
     "prisma": "4.13.0",
