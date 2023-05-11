@@ -90,7 +90,7 @@ model Treatment {
   id              String @id @default(uuid())
   title           String
   price_treatment String
-  cost_treatment  String
+  cost_treatmento String
 
   @@map("treatments")
 }
@@ -103,6 +103,4 @@ model PatientTreatment {
   professional_id String
   patient         Patient      @relation(fields: [patient_id], references: [id])
   patient_id      String
-
-  @@map("patient_tratments")
 }

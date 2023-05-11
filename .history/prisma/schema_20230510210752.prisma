@@ -90,7 +90,7 @@ model Treatment {
   id              String @id @default(uuid())
   title           String
   price_treatment String
-  cost_treatment  String
+  cost_treatmento String
 
   @@map("treatments")
 }
