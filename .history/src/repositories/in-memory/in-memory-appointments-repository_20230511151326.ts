@@ -111,20 +111,5 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     return appointments
   }
 
-  async findManyAppointmentsByRoomAndDate(roomId: string, date: Date) {
-    const appointments = this.items.filter((item) => {
-      const startOfDay = dayjs.utc(date).startOf('day')
-      const endOfDay = dayjs.utc(date).endOf('day')
-
-      const dateJs = dayjs(item.date_hour)
-
-      return (
-        dateJs.isAfter(startOfDay) &&
-        dateJs.isBefore(endOfDay) &&
-        item.room_id === roomId
-      )
-    })
-
-    return appointments
-  }
+  fetchAppointmentsByRoomAndDate(roomId: string, date: Date) {}
 }

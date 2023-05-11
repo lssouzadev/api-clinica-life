@@ -17,11 +17,11 @@ export class InMemoryTreatmentsRepository implements TreatmentsRepository {
     return treatment
   }
 
-  async delete(treatmentId: string) {
-    const treatmentIndex = this.items.findIndex(
-      (item) => item.id === treatmentId,
+  async delete(professionalId: string) {
+    const professionalIndex = this.items.findIndex(
+      (item) => item.id === professionalId,
     )
 
-    this.items.splice(treatmentIndex, 1)
+    this.items.splice(professionalIndex, 1)
   }
 }

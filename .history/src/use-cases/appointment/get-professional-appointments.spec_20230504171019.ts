@@ -39,6 +39,7 @@ describe('Get Patient Appointments History Use Case', () => {
       professionalId: 'prof-02',
     })
 
+    console.log(appointments)
     expect(appointments).toHaveLength(2)
     expect(appointments).toEqual([
       expect.objectContaining({ patient_id: 'patient-02' }),
