@@ -52,25 +52,12 @@ export class InMemoryProfessionalsRepository
     this.items.splice(professionalIndex, 1)
   }
 
-  async findById(id: string) {
-    const professional = this.items.find((item) => item.id === id)
-
-    if (!professional) {
-      return null
-    }
-
-    return professional
-  }
-
   async save(professional: Professional) {
-    const professionalIndex = this.items.findIndex(
-      (item) => item.id === professional.id,
-    )
+    const professionalIndex = this.items.findIndex((item) => item.id === professional.id)
 
     if (professionalIndex >= 0) {
       this.items[professionalIndex] = professional
     }
 
     return professional
-  }
 }

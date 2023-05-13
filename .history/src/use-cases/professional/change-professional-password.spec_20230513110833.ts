@@ -1,19 +1,20 @@
 import { InMemoryProfessionalsRepository } from '@/repositories/in-memory/in-memory-professionals-repository'
-import { AuthenticateProfessionalUseCase } from './authenticate-professional'
+import { ChangeProfessionalPasswordUseCase } from './change-professional-password'
 import { beforeEach, describe, it } from 'vitest'
-import { hash } from 'bcryptjs'
+import { compare, hash } from 'bcryptjs'
 
 let professionalsRepository: InMemoryProfessionalsRepository
-let sut: AuthenticateProfessionalUseCase
+let sut: ChangeProfessionalPasswordUseCase
 
-describe('Authenticate Professional Use Case', () => {
+describe('Change Professional Password Use Case', () => {
   beforeEach(() => {
     professionalsRepository = new InMemoryProfessionalsRepository()
-    sut = new AuthenticateProfessionalUseCase(professionalsRepository)
+    sut = new ChangeProfessionalPasswordUseCase(professionalsRepository)
   })
 
-  it('should be able to authenticate professional', async () => {
+  it('should be able to change a professional password', async () => {
     await professionalsRepository.create({
+      id: 'id-01',
       name: 'John Doe',
       email: 'johndoe@example.com',
       password_hash: await hash('123456', 6),
@@ -23,9 +24,12 @@ describe('Authenticate Professional Use Case', () => {
       clinic_id: 'clinic-01',
     })
 
-    await sut.execute({
-      email: 'johndoe@example.com',
-      password: '123456',
+    const { professional } = await sut.execute({
+      professionalId: 'id-01',
+      oldPassword: '123456',
+      newPassword: '12345678',
     })
+
+    const isCorrectlyPasswordMatches = compare(pro)
   })
 })

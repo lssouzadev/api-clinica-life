@@ -54,12 +54,6 @@ export class InMemoryProfessionalsRepository
 
   async findById(id: string) {
     const professional = this.items.find((item) => item.id === id)
-
-    if (!professional) {
-      return null
-    }
-
-    return professional
   }
 
   async save(professional: Professional) {

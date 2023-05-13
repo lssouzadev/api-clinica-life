@@ -52,14 +52,8 @@ export class InMemoryProfessionalsRepository
     this.items.splice(professionalIndex, 1)
   }
 
-  async findById(id: string) {
-    const professional = this.items.find((item) => item.id === id)
-
-    if (!professional) {
-      return null
-    }
-
-    return professional
+  findById(id: string): Promise<Professional | null> {
+    throw new Error('Method not implemented.')
   }
 
   async save(professional: Professional) {

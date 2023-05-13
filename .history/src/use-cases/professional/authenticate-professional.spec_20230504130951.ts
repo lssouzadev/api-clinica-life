@@ -13,7 +13,7 @@ describe('Authenticate Professional Use Case', () => {
   })
 
   it('should be able to authenticate professional', async () => {
-    await professionalsRepository.create({
+    professionalsRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password_hash: await hash('123456', 6),

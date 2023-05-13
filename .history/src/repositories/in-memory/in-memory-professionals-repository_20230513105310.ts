@@ -58,8 +58,6 @@ export class InMemoryProfessionalsRepository
     if (!professional) {
       return null
     }
-
-    return professional
   }
 
   async save(professional: Professional) {
