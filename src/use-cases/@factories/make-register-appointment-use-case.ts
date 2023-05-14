@@ -1,11 +1,14 @@
 import { PrismaAppointmentsRepository } from '@/repositories/prisma/prisma-appointments-repository'
-import { RegisterAppointmentUseCase } from '../register-appointment'
+import { RegisterAppointmentUseCase } from '../appointment/register-appointment'
+import { PrismaProfessionalRoomsRepository } from '@/repositories/prisma/prisma-professional-rooms-repository'
 
 export function makeRegisterAppointmentUseCase() {
-  const schedulesRepository = new PrismaAppointmentsRepository()
-  const registerSchedulingUseCase = new RegisterAppointmentUseCase(
-    schedulesRepository,
+  const appointmentsRepository = new PrismaAppointmentsRepository()
+  const professionalRoomsRepository = new PrismaProfessionalRoomsRepository()
+  const registerAppointmentUseCase = new RegisterAppointmentUseCase(
+    appointmentsRepository,
+    professionalRoomsRepository,
   )
 
-  return registerSchedulingUseCase
+  return registerAppointmentUseCase
 }

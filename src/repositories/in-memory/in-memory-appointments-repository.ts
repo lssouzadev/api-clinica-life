@@ -66,7 +66,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     this.items.splice(appointmentIndex, 1)
   }
 
-  async findAppointmentsByProfessionalIdAndDate(
+  async findAppointmentByProfessionalIdAndDate(
     professionalId: string,
     date: Date,
   ) {

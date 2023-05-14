@@ -6,18 +6,17 @@ export interface AppointmentsRepository {
     dateHour: Date,
     roomId: string,
   ): Promise<Appointment | null>
+  findAppointmentByProfessionalIdAndDate(
+    professionalId: string,
+    date: Date,
+  ): Promise<Appointment | null>
   findManyAppointmentsByProfessionalIdAndDate(
     professionalId: string,
     date: Date,
   ): Promise<Appointment[]>
   deleteAppointment(appointmentId: string): Promise<void>
-  findManyAppointmentsByProfessionalIdAndDate(
-    professionalId: string,
-    date: Date,
-  ): Promise<Appointment[]>
   findManyAppointmentsByDate(date: Date): Promise<Appointment[]>
   findManyAppointmentsByPatientId(patientId: string): Promise<Appointment[]>
-
   findManyAppointmentsByRoomAndDate(
     roomId: string,
     date: Date,

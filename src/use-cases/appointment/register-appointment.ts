@@ -62,7 +62,7 @@ export class RegisterAppointmentUseCase {
     }
 
     const professionalAppointments =
-      await this.appointmentsRepository.findAppointmentsByProfessionalIdAndDate(
+      await this.appointmentsRepository.findAppointmentByProfessionalIdAndDate(
         professionalId,
         dateHour,
       )

@@ -54,6 +54,25 @@ export class PrismaAppointmentsRepository implements AppointmentsRepository {
     return appointments
   }
 
+  async findAppointmentByProfessionalIdAndDate(
+    professionalId: string,
+    date: Date,
+  ) {
+    const appointment = await prisma.appointment.findFirst({
+      where: {
+        AND: [
+          {
+            date_hour: dayjs.utc(date).toDate(),
+          },
+          {
+            professional_id: professionalId,
+          },
+        ],
+      },
+    })
+    return appointment
+  }
+
   async deleteAppointment(appointmentId: string) {
     await prisma.appointment.delete({
       where: {
