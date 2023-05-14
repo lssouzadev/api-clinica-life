@@ -1,10 +1,14 @@
 import fastify from 'fastify'
-import { appRoutes } from './http/routes'
+import { clinicRoutes } from './http/controllers/clinics/routes'
 import { ZodError } from 'zod'
+import { professionalRoutes } from './http/controllers/professionals/routes'
+import { appointmentRoutes } from './http/controllers/appointments/routes'
 
 export const app = fastify()
 
-app.register(appRoutes)
+app.register(clinicRoutes)
+app.register(professionalRoutes)
+app.register(appointmentRoutes)
 
 app.setErrorHandler((error, _request, reply) => {
   if (error instanceof ZodError) {

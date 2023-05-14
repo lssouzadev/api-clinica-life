@@ -5,10 +5,7 @@ import { AppointmentAlreadyExistsError } from '@/use-cases/@errors/appointment-a
 import { OutOfOfficeHoursError } from '@/use-cases/@errors/ out-of-office-hours-error'
 import { InvalidAppointmentTimeError } from '@/use-cases/@errors/invalid-appointment-time-error'
 
-export async function appointment(
-  request: FastifyRequest,
-  reply: FastifyReply,
-) {
+export async function register(request: FastifyRequest, reply: FastifyReply) {
   const appointmentBodySchema = z.object({
     dateHour: z.string(),
     professionalId: z.string(),
