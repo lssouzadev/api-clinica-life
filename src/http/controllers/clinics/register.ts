@@ -2,10 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { makeRegisterClinicUseCase } from '@/use-cases/@factories/make-register-clinic-use-case'
 
-export async function registerClinic(
-  request: FastifyRequest,
-  reply: FastifyReply,
-) {
+export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerClinicBodySchema = z.object({
     name: z.string(),
     address: z.string(),

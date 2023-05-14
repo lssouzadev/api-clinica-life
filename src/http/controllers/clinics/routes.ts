@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
-import { registerClinic } from './register-clinic'
+import { register } from './register'
 
 export async function clinicRoutes(app: FastifyInstance) {
-  app.post('/clinics', registerClinic)
+  app.post('/clinics', register)
 }
