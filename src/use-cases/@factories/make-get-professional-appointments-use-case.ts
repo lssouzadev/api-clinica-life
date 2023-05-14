@@ -1,5 +1,5 @@
 import { PrismaAppointmentsRepository } from '@/repositories/prisma/prisma-appointments-repository'
-import { GetProfessionalAppointmentsUseCase } from '../get-professional-appointments'
+import { GetProfessionalAppointmentsUseCase } from '../appointment/get-professional-appointments'
 
 export function makeGetProfessionalAppointmentsUseCase() {
   const appointmentsRepository = new PrismaAppointmentsRepository()

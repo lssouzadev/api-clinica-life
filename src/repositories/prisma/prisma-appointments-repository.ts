@@ -29,7 +29,7 @@ export class PrismaAppointmentsRepository implements AppointmentsRepository {
     return appointment
   }
 
-  async findAppointmentsByProfessionalIdAndDate(
+  async findManyAppointmentsByProfessionalIdAndDate(
     professionalId: string,
     date: Date,
   ) {
@@ -60,5 +60,75 @@ export class PrismaAppointmentsRepository implements AppointmentsRepository {
         id: appointmentId,
       },
     })
+  }
+
+  async findAppointmentByRoomIdAndDateHour(dateHour: Date, roomId: string) {
+    const appointment = await prisma.appointment.findFirst({
+      where: {
+        AND: [
+          {
+            date_hour: dayjs.utc(dateHour).toDate(),
+          },
+          {
+            room_id: roomId,
+          },
+        ],
+      },
+      orderBy: {
+        date_hour: 'asc',
+      },
+    })
+
+    if (!appointment) {
+      return null
+    }
+
+    return appointment
+  }
+
+  async findManyAppointmentsByDate(date: Date) {
+    const appointments = await prisma.appointment.findMany({
+      where: {
+        date_hour: {
+          gte: dayjs.utc(date).startOf('day').toDate(),
+          lt: dayjs.utc(date).endOf('day').toDate(),
+        },
+      },
+    })
+
+    return appointments
+  }
+
+  async findManyAppointmentsByPatientId(patientId: string) {
+    const appointments = await prisma.appointment.findMany({
+      where: {
+        patient_id: patientId,
+      },
+    })
+
+    return appointments
+  }
+
+  async findManyAppointmentsByRoomAndDate(roomId: string, date: Date) {
+    const appointments = await prisma.appointment.findMany({
+      where: {
+        AND: [
+          {
+            date_hour: {
+              gte: dayjs.utc(date).startOf('day').toDate(),
+              lt: dayjs.utc(date).endOf('day').toDate(),
+            },
+          },
+          {
+            room_id: roomId,
+          },
+        ],
+      },
+      orderBy: {
+        date_hour: 'asc',
+      },
+    })
+
+    return appointments
   }
 }

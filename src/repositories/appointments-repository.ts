@@ -11,10 +11,10 @@ export interface AppointmentsRepository {
     date: Date,
   ): Promise<Appointment[]>
   deleteAppointment(appointmentId: string): Promise<void>
-  findAppointmentsByProfessionalIdAndDate(
+  findManyAppointmentsByProfessionalIdAndDate(
     professionalId: string,
     date: Date,
-  ): Promise<Appointment | null>
+  ): Promise<Appointment[]>
   findManyAppointmentsByDate(date: Date): Promise<Appointment[]>
   findManyAppointmentsByPatientId(patientId: string): Promise<Appointment[]>
 
