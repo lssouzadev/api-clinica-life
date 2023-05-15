@@ -10,6 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  type          String
+
+  professional Professional? @relation(fields: [professional_id], references: [id])
+  patient      Patient?      @relation(fields: [patient_id], references: [id])
+
+  professional_id String?
+  patient_id      String?
+
+  @@map("users")
+}
+
 model Clinic {
   id            String         @id @default(uuid())
   name          String
@@ -30,6 +47,7 @@ model Patient {
   created_at        DateTime           @default(now())
   Appointments      Appointment[]
   PatientTreatments PatientTreatment[]
+  Users             User[]
 
   @@map("patients")
 }
@@ -60,8 +78,6 @@ model Room {
 model Professional {
   id                String             @id @default(uuid())
   name              String
-  email             String             @unique
-  password_hash     String
   cpf               String             @unique
   specialty         String
   phone             String
@@ -71,6 +87,7 @@ model Professional {
   Appointments      Appointment[]
   ProfessionalRooms ProfessionalRoom[]
   PatientTreatments PatientTreatment[]
+  Users             User[]
 
   @@map("professionals")
 }

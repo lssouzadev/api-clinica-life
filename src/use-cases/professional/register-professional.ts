@@ -1,12 +1,9 @@
 import { Professional } from '@prisma/client'
 import { ProfessionalsRepository } from '@/repositories/professionals-repository'
 import { ProfessionalAlreadyExistsError } from '../@errors/professional-already-exists-error'
-import { hash } from 'bcryptjs'
 
 interface RegisterProfessionalUseCaseRequest {
   name: string
-  email: string
-  password: string
   cpf: string
   specialty: string
   phone: string
@@ -22,8 +19,6 @@ export class RegisterProfessionalUseCase {
 
   async execute({
     name,
-    email,
-    password,
     specialty,
     cpf,
     phone,
@@ -37,12 +32,8 @@ export class RegisterProfessionalUseCase {
       throw new ProfessionalAlreadyExistsError()
     }
 
-    const password_hash = await hash(password, 6)
-
     const professional = await this.professionalRepository.create({
       name,
-      email,
-      password_hash,
       specialty,
       cpf,
       phone,

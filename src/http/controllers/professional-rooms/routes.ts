@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { create } from './create'
 
-export async function professionalRoutes(app: FastifyInstance) {
+export async function professionalRoomRoutes(app: FastifyInstance) {
   app.post('/room/:roomId/professional', create)
 }
