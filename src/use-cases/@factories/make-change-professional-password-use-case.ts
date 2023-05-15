@@ -1,10 +1,11 @@
-import { PrismaProfessionalsRepository } from '@/repositories/prisma/prisma-professionals-repository'
-import { ChangeProfessionalPasswordUseCase } from '../professional/change-professional-password'
+import { ChangeUserPasswordUseCase } from '../user/change-user-password'
+import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository'
 
 export function makeChangeProfessionalPasswordUseCase() {
-  const professionalsRepository = new PrismaProfessionalsRepository()
-  const changeProfessionalPasswordUseCase =
-    new ChangeProfessionalPasswordUseCase(professionalsRepository)
+  const usersRepository = new PrismaUsersRepository()
+  const changeUserPasswordUseCase = new ChangeUserPasswordUseCase(
+    usersRepository,
+  )
 
-  return changeProfessionalPasswordUseCase
+  return changeUserPasswordUseCase
 }

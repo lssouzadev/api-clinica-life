@@ -1,4 +1,4 @@
-import { Professional, Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { ProfessionalsRepository } from '../professionals-repository'
 import { prisma } from '../../lib/prisma'
 
@@ -15,20 +15,6 @@ export class PrismaProfessionalsRepository implements ProfessionalsRepository {
     const professional = await prisma.professional.findUnique({
       where: {
         cpf,
-      },
-    })
-
-    if (!professional) {
-      return null
-    }
-
-    return professional
-  }
-
-  async findByEmail(email: string) {
-    const professional = await prisma.professional.findUnique({
-      where: {
-        email,
       },
     })
 
@@ -59,16 +45,5 @@ export class PrismaProfessionalsRepository implements ProfessionalsRepository {
         id: professionalId,
       },
     })
-  }
-
-  async save(data: Professional) {
-    const professional = await prisma.professional.update({
-      where: {
-        id: data.id,
-      },
-      data,
-    })
-
-    return professional
   }
 }

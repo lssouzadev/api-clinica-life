@@ -10,8 +10,6 @@ export class InMemoryProfessionalsRepository
     const professional = {
       id: data.id ?? randomUUID(),
       name: data.name,
-      email: data.email,
-      password_hash: data.password_hash,
       cpf: data.cpf,
       avatar: data.avatar ?? null,
       specialty: data.specialty,
@@ -34,8 +32,8 @@ export class InMemoryProfessionalsRepository
     return professional
   }
 
-  async findByEmail(email: string) {
-    const professional = this.items.find((item) => item.email === email)
+  async findById(id: string) {
+    const professional = this.items.find((item) => item.id === id)
 
     if (!professional) {
       return null
@@ -50,27 +48,5 @@ export class InMemoryProfessionalsRepository
     )
 
     this.items.splice(professionalIndex, 1)
-  }
-
-  async findById(id: string) {
-    const professional = this.items.find((item) => item.id === id)
-
-    if (!professional) {
-      return null
-    }
-
-    return professional
-  }
-
-  async save(professional: Professional) {
-    const professionalIndex = this.items.findIndex(
-      (item) => item.id === professional.id,
-    )
-
-    if (professionalIndex >= 0) {
-      this.items[professionalIndex] = professional
-    }
-
-    return professional
   }
 }

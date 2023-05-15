@@ -5,5 +5,4 @@ export interface ProfessionalsRepository {
   findByCpf(cpf: string): Promise<Professional | null>
   findById(id: string): Promise<Professional | null>
   delete(professionalId: string): Promise<void>
-  save(professional: Professional): Promise<Professional>
 }

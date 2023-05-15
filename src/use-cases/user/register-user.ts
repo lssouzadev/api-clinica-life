@@ -5,9 +5,11 @@ import { UserAlreadyExistsError } from '../@errors/user-already-exists-error'
 import { IncorrectTypeError } from '../@errors/incorrect-type-error'
 import { ProfessionalNotFoundError } from '../@errors/professional-not-found-error'
 import { PatientNotFoundError } from '../@errors/patient-not-found-error'
+import { ProfessionalsRepository } from '@/repositories/professionals-repository'
+import { PatientsRepository } from '@/repositories/patients-repository'
 
 interface RegisterUserUseCaseRequest {
-  name: string
+  username: string
   email: string
   password: string
   type: string
@@ -20,10 +22,14 @@ interface RegisterUserUseCaseResponse {
 }
 
 export class RegisterUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(
+    private usersRepository: UsersRepository,
+    private professionalsRepository: ProfessionalsRepository,
+    private patientsRepository: PatientsRepository,
+  ) {}
 
   async execute({
-    name,
+    username,
     email,
     password,
     type,
@@ -34,6 +40,19 @@ export class RegisterUserUseCase {
 
     const createdProfessionalId = professionalId ?? null
     const createdPatientId = patientId ?? null
+
+    let professional
+
+    if (createdProfessionalId) {
+      professional = await this.professionalsRepository.findById(
+        createdProfessionalId,
+      )
+    }
+
+    let patient
+    if (createdPatientId) {
+      patient = await this.patientsRepository.findById(createdPatientId)
+    }
 
     const userWithSameEmail = await this.usersRepository.findByEmail(email)
 
@@ -55,7 +74,7 @@ export class RegisterUserUseCase {
 
     if (type === 'professional') {
       const user = await this.usersRepository.create({
-        name,
+        name: professional?.name ?? username,
         email,
         password_hash,
         type,
@@ -68,7 +87,7 @@ export class RegisterUserUseCase {
     }
 
     const user = await this.usersRepository.create({
-      name,
+      name: patient?.name ?? username,
       email,
       password_hash,
       type,

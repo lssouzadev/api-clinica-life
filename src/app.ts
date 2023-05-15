@@ -9,6 +9,7 @@ import { patientRoutes } from './http/controllers/patients/routes'
 import { professionalRoomRoutes } from './http/controllers/professional-rooms/routes'
 import { treatmentRoutes } from './http/controllers/treatments/routes'
 import { roomRoutes } from './http/controllers/rooms/routes'
+import { usersRoutes } from './http/controllers/users/routes'
 
 export const app = fastify()
 
@@ -16,6 +17,7 @@ app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 })
 
+app.register(usersRoutes)
 app.register(clinicRoutes)
 app.register(professionalRoutes)
 app.register(appointmentRoutes)
