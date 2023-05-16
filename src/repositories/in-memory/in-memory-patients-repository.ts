@@ -30,4 +30,14 @@ export class InMemoryPatientsRepository implements PatientsRepository {
 
     return patient
   }
+
+  async findById(id: string) {
+    const patient = this.items.find((item) => item.id === id)
+
+    if (!patient) {
+      return null
+    }
+
+    return patient
+  }
 }

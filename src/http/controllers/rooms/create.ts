@@ -14,4 +14,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   createRoomUseCase.execute({
     title,
   })
+
+  return reply.status(201).send()
 }

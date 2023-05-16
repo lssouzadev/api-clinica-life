@@ -46,6 +46,7 @@ export class RegisterAppointmentUseCase {
     if (!professionalRoomVerification) {
       throw new ProfessionalNotAllowedError()
     }
+    console.log('passei 1')
     const startOfDay = dayjs.utc(dateHour).set('hour', 7).set('minute', 0)
     const endOfDay = dayjs.utc(dateHour).set('hour', 21).set('minute', 0)
 

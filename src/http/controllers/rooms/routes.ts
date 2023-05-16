@@ -4,5 +4,5 @@ import { verifyJWT } from '@/http/middlewares/verify-jwt'
 
 export async function roomRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJWT)
-  app.post('/room', create)
+  app.post('/rooms', create)
 }

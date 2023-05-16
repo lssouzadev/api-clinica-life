@@ -7,7 +7,7 @@ export async function deleteTreatment(
   reply: FastifyReply,
 ) {
   const deleteTreatmentParamsSchema = z.object({
-    treatmentId: z.string().uuid(),
+    treatmentId: z.string(),
   })
 
   const { treatmentId } = deleteTreatmentParamsSchema.parse(request.params)

@@ -44,5 +44,6 @@ export async function createAndAuthenticateUser(
 
   return {
     token,
+    professional,
   }
 }

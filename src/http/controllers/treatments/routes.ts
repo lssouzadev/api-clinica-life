@@ -5,7 +5,7 @@ import { verifyJWT } from '@/http/middlewares/verify-jwt'
 
 export async function treatmentRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJWT)
-  app.post('/treatment', create)
+  app.post('/treatments', create)
 
-  app.post('/treatment/:treatmentId/delete', deleteTreatment)
+  app.post('/treatments/:treatmentId/delete', deleteTreatment)
 }

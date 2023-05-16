@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { register } from './register'
+import { create } from './create'
 import { getByProfessional } from './getByProfessional'
 import { deleteAppointment } from './delete'
 import { patientHistory } from './patient-history'
@@ -9,15 +9,15 @@ import { verifyJWT } from '@/http/middlewares/verify-jwt'
 
 export async function appointmentRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJWT)
-  app.post('/appointment', register)
+  app.post('/appointments', create)
 
-  app.post('/appointment/:appointmentId/delete', deleteAppointment)
+  app.post('/appointments/:appointmentId/delete', deleteAppointment)
 
-  app.get('/professional/:professionalId/appointments', getByProfessional)
+  app.get('/professionals/:professionalId/appointments', getByProfessional)
 
-  app.get('/patient/:patientId/appointments', patientHistory)
+  app.get('/patients/:patientId/appointments', patientHistory)
 
-  app.get('/appointment/get', getByDate)
+  app.get('/appointments/get', getByDate)
 
-  app.get('/room/appointments', fetchManyByRoomAndDate)
+  app.get('/rooms/appointments', fetchManyByRoomAndDate)
 }
