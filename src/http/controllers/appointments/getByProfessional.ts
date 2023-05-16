@@ -7,20 +7,23 @@ export async function getByProfessional(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const getByProfessionalBodySchema = z.object({
-    dateHour: z.string(),
+  const getByProfessionalParamsSchema = z.object({
     professionalId: z.string(),
   })
 
-  const { professionalId, dateHour } = getByProfessionalBodySchema.parse(
-    request.query,
-  )
+  const getByProfessionalQuerySchema = z.object({
+    date: z.string(),
+  })
+
+  const { professionalId } = getByProfessionalParamsSchema.parse(request.params)
+
+  const { date } = getByProfessionalQuerySchema.parse(request.query)
 
   const getProfessionalAppointmentsUseCase =
     makeGetProfessionalAppointmentsUseCase()
 
   const { appointments } = await getProfessionalAppointmentsUseCase.execute({
-    date: new Date(dateHour),
+    date: new Date(date),
     professionalId,
   })
 

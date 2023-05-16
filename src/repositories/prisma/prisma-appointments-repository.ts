@@ -8,11 +8,11 @@ dayjs.extend(utc)
 
 export class PrismaAppointmentsRepository implements AppointmentsRepository {
   async create(data: Prisma.AppointmentUncheckedCreateInput) {
-    const scheduling = await prisma.appointment.create({
+    const appointment = await prisma.appointment.create({
       data,
     })
 
-    return scheduling
+    return appointment
   }
 
   async findAppointmentByDateHour(dateHour: Date) {

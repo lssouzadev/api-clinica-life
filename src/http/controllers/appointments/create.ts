@@ -4,6 +4,11 @@ import { z } from 'zod'
 import { AppointmentAlreadyExistsError } from '@/use-cases/@errors/appointment-already-exists-error'
 import { OutOfOfficeHoursError } from '@/use-cases/@errors/ out-of-office-hours-error'
 import { InvalidAppointmentTimeError } from '@/use-cases/@errors/invalid-appointment-time-error'
+import { ProfessionalNotAllowedError } from '@/use-cases/@errors/professional-not-allowed-error'
+import { ProfessionalNotFoundError } from '@/use-cases/@errors/professional-not-found-error'
+import { PatientNotFoundError } from '@/use-cases/@errors/patient-not-found-error'
+import { RoomNotFoundError } from '@/use-cases/@errors/room-not-found-error'
+import { ProfessionalUnavailableError } from '@/use-cases/@errors/professional-unavailable-error'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const appointmentBodySchema = z.object({
@@ -26,7 +31,23 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       roomId,
     })
   } catch (err) {
-    if (err instanceof AppointmentAlreadyExistsError) {
+    if (err instanceof ProfessionalNotAllowedError) {
+      return reply.status(400).send({ message: err.message })
+    }
+
+    if (err instanceof ProfessionalNotFoundError) {
+      return reply.status(400).send({ message: err.message })
+    }
+
+    if (err instanceof PatientNotFoundError) {
+      return reply.status(400).send({ message: err.message })
+    }
+
+    if (err instanceof RoomNotFoundError) {
+      return reply.status(400).send({ message: err.message })
+    }
+
+    if (err instanceof InvalidAppointmentTimeError) {
       return reply.status(400).send({ message: err.message })
     }
 
@@ -34,7 +55,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       return reply.status(400).send({ message: err.message })
     }
 
-    if (err instanceof InvalidAppointmentTimeError) {
+    if (err instanceof ProfessionalUnavailableError) {
+      return reply.status(400).send({ message: err.message })
+    }
+
+    if (err instanceof AppointmentAlreadyExistsError) {
       return reply.status(400).send({ message: err.message })
     }
 

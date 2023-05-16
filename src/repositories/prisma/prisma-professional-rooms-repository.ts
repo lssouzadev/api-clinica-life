@@ -17,7 +17,7 @@ export class PrismaProfessionalRoomsRepository
     professionalId: string,
     roomId: string,
   ): Promise<ProfessionalRoom | null> {
-    const professionalRoom = prisma.professionalRoom.findFirst({
+    const professionalRoom = await prisma.professionalRoom.findFirst({
       where: {
         AND: [
           {

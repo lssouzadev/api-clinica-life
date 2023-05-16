@@ -10,4 +10,18 @@ export class PrismaRoomsRepository implements RoomsRepository {
 
     return room
   }
+
+  async findById(id: string) {
+    const room = await prisma.room.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!room) {
+      return null
+    }
+
+    return room
+  }
 }

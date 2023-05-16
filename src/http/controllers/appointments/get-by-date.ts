@@ -4,19 +4,21 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function getByDate(request: FastifyRequest, reply: FastifyReply) {
-  const getByDateBodySchema = z.object({
+  const getByDateQuerySchema = z.object({
     date: z.string(),
   })
 
-  const { date } = getByDateBodySchema.parse(request.body)
+  const { date } = getByDateQuerySchema.parse(request.query)
 
   const dateFormat = dayjs.utc(date).toDate()
 
   const getAppointmentsByDateUseCase = makeGetAppointmentsByDateUseCase()
 
-  getAppointmentsByDateUseCase.execute({
+  const { appointments } = await getAppointmentsByDateUseCase.execute({
     date: dateFormat,
   })
 
-  return reply.status(200).send()
+  return reply.status(200).send({
+    appointments,
+  })
 }

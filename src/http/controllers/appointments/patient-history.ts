@@ -15,9 +15,11 @@ export async function patientHistory(
   const getPatientAppointmentsHistoryUseCase =
     makeGetPatientAppointmentsHistoryUseCase()
 
-  getPatientAppointmentsHistoryUseCase.execute({
+  const { appointments } = await getPatientAppointmentsHistoryUseCase.execute({
     patientId,
   })
 
-  return reply.status(200).send()
+  return reply.status(200).send({
+    appointments,
+  })
 }

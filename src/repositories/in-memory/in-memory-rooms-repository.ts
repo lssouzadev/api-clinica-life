@@ -14,4 +14,14 @@ export class InMemoryRoomsRepository implements RoomsRepository {
 
     return room
   }
+
+  async findById(id: string) {
+    const room = this.items.find((item) => item.id === id)
+
+    if (!room) {
+      return null
+    }
+
+    return room
+  }
 }

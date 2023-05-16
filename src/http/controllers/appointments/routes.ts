@@ -19,5 +19,5 @@ export async function appointmentRoutes(app: FastifyInstance) {
 
   app.get('/appointments/get', getByDate)
 
-  app.get('/rooms/appointments', fetchManyByRoomAndDate)
+  app.get('/rooms/:roomId/appointments', fetchManyByRoomAndDate)
 }

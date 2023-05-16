@@ -9,6 +9,12 @@ import { AppointmentAlreadyExistsError } from '../@errors/appointment-already-ex
 import { ProfessionalUnavailableError } from '../@errors/professional-unavailable-error'
 import { ProfessionalRoomsRepository } from '@/repositories/professional-rooms-repository'
 import { ProfessionalNotAllowedError } from '../@errors/professional-not-allowed-error'
+import { ProfessionalsRepository } from '@/repositories/professionals-repository'
+import { RoomsRepository } from '@/repositories/rooms-repository'
+import { PatientsRepository } from '@/repositories/patients-repository'
+import { ProfessionalNotFoundError } from '../@errors/professional-not-found-error'
+import { PatientNotFoundError } from '../@errors/patient-not-found-error'
+import { RoomNotFoundError } from '../@errors/room-not-found-error'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -29,6 +35,9 @@ export class RegisterAppointmentUseCase {
   constructor(
     private appointmentsRepository: AppointmentsRepository,
     private professionalRoomsRepository: ProfessionalRoomsRepository,
+    private professionalsRepository: ProfessionalsRepository,
+    private roomsRepository: RoomsRepository,
+    private patientsRepository: PatientsRepository,
   ) {}
 
   async execute({
@@ -46,7 +55,27 @@ export class RegisterAppointmentUseCase {
     if (!professionalRoomVerification) {
       throw new ProfessionalNotAllowedError()
     }
-    console.log('passei 1')
+
+    const checkProfessionalExists = await this.professionalsRepository.findById(
+      professionalId,
+    )
+
+    if (!checkProfessionalExists) {
+      throw new ProfessionalNotFoundError()
+    }
+
+    const checkPatientExists = await this.patientsRepository.findById(patientId)
+
+    if (!checkPatientExists) {
+      throw new PatientNotFoundError()
+    }
+
+    const checkRoomExists = await this.roomsRepository.findById(roomId)
+
+    if (!checkRoomExists) {
+      throw new RoomNotFoundError()
+    }
+
     const startOfDay = dayjs.utc(dateHour).set('hour', 7).set('minute', 0)
     const endOfDay = dayjs.utc(dateHour).set('hour', 21).set('minute', 0)
 
@@ -83,7 +112,7 @@ export class RegisterAppointmentUseCase {
     }
 
     const appointment = await this.appointmentsRepository.create({
-      date_hour: dateHour,
+      date_hour: dateHourFns.toDate(),
       professional_id: professionalId,
       patient_id: patientId,
       room_id: roomId,

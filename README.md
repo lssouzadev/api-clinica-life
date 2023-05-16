@@ -2,7 +2,7 @@
 - [x] deve ser possível se cadastrar;
 - [x] deve ser possível se autenticar;
 - [x] deve ser possível alterar a senha do usuário
-- [ ] deve ser possível obter o perfil de um usuário logado;
+- [x] deve ser possível obter o perfil de um usuário logado;
 - [x] deve ser possível registrar um agendamento;
 - [x] deve ser possível cadastrar uma sala de atendimento;
 - [x] deve ser possível excluir um agendamento;
@@ -16,6 +16,10 @@
 - [ ] deve ser possível editar atendimentos;
 - [x] deve ser possível cadastrar tratamentos;
 - [x] deve ser possível excluir tratamentos;
+- [ ] deve ser possível listar todos os pacientes
+- [ ] deve ser possível buscar um paciente
+- [ ] deve ser possível listar todos os profissionais
+- [ ] deve ser possível buscar um profissional
 
 ## RNs (Regras de negócio)
 
@@ -33,5 +37,6 @@
 - [x] A senha do usuário precisa estar criptografada;
 - [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página;
-- [ ] O usuário deve ser ir identificado por um JTW (JSON Web Token);
+- [x] O usuário deve ser ir identificado por um JTW (JSON Web Token);
 
+46786575000182

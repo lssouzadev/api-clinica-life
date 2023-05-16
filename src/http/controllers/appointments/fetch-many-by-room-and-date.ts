@@ -8,26 +8,30 @@ export async function fetchManyByRoomAndDate(
   reply: FastifyReply,
 ) {
   const fetchByRoomAndDateParamsSchema = z.object({
-    roomId: z.string().uuid(),
+    roomId: z.string(),
   })
 
-  const fetchByRoomAndDateBodySchema = z.object({
-    date: z.string().uuid(),
+  const fetchByRoomAndDateQuerySchema = z.object({
+    date: z.string(),
   })
 
   const { roomId } = fetchByRoomAndDateParamsSchema.parse(request.params)
+  console.log('passei aqui 1')
+  const { date } = fetchByRoomAndDateQuerySchema.parse(request.query)
 
-  const { date } = fetchByRoomAndDateBodySchema.parse(request.body)
+  console.log('passei aqui')
 
   const dateFormat = dayjs.utc(date).toDate()
 
   const fetchAppointmentsByRoomAndDateUseCase =
     makeFetchAppointmentsByRoomAndDateUseCase()
 
-  fetchAppointmentsByRoomAndDateUseCase.execute({
+  const { appointments } = await fetchAppointmentsByRoomAndDateUseCase.execute({
     roomId,
     date: dateFormat,
   })
 
-  return reply.status(200).send()
+  return reply.status(200).send({
+    appointments,
+  })
 }

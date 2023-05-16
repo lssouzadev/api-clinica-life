@@ -6,18 +6,27 @@ import { AppointmentAlreadyExistsError } from '../@errors/appointment-already-ex
 import { OutOfOfficeHoursError } from '../@errors/ out-of-office-hours-error'
 import { ProfessionalUnavailableError } from '../@errors/professional-unavailable-error'
 import { InMemoryProfessionalRoomsRepository } from '@/repositories/in-memory/in-memory-professional-rooms-repository'
-
+import { InMemoryProfessionalsRepository } from '@/repositories/in-memory/in-memory-professionals-repository'
+import { InMemoryPatientsRepository } from '@/repositories/in-memory/in-memory-patients-repository'
+import { InMemoryRoomsRepository } from '@/repositories/in-memory/in-memory-rooms-repository'
+let professionalsRepository: InMemoryProfessionalsRepository
+let patientsRepository: InMemoryPatientsRepository
+let roomsRepository: InMemoryRoomsRepository
 let professionalRoomsRepository: InMemoryProfessionalRoomsRepository
 let appointmentsRepository: InMemoryAppointmentsRepository
 let sut: RegisterAppointmentUseCase
 
 describe('Register Appointment Use Case', () => {
   beforeEach(() => {
+    professionalsRepository = new InMemoryProfessionalsRepository()
     professionalRoomsRepository = new InMemoryProfessionalRoomsRepository()
     appointmentsRepository = new InMemoryAppointmentsRepository()
     sut = new RegisterAppointmentUseCase(
       appointmentsRepository,
       professionalRoomsRepository,
+      professionalsRepository,
+      roomsRepository,
+      patientsRepository,
     )
   })
 
