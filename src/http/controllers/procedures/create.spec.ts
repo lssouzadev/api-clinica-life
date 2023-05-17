@@ -1,10 +1,9 @@
 import { app } from '@/app'
-import { prisma } from '@/lib/prisma'
 import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-describe('Delete (e2e)', () => {
+describe('Create (e2e)', () => {
   beforeAll(() => {
     app.ready()
   })
@@ -13,22 +12,18 @@ describe('Delete (e2e)', () => {
     app.close()
   })
 
-  it('should be able to delete a treatment', async () => {
+  it('should be able to create a procedure', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
-    const treatment = await prisma.treatment.create({
-      data: {
-        title: 'extraction',
-        price_treatment: '25,00',
-        cost_treatment: '10,00',
-      },
-    })
-
     const response = await request(app.server)
-      .post(`/treatments/${treatment.id}/delete`)
+      .post('/procedures')
       .set('Authorization', `Bearer ${token}`)
-      .send()
+      .send({
+        title: 'extraction',
+        priceProcedure: '25,00',
+        costProcedure: '10,00',
+      })
 
-    expect(response.statusCode).toEqual(200)
+    expect(response.statusCode).toEqual(201)
   })
 })

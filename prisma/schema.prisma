@@ -103,13 +103,13 @@ model ProfessionalRoom {
   @@map("professional_rooms")
 }
 
-model Treatment {
+model Procedure {
   id              String @id @default(uuid())
   title           String
-  price_treatment String
-  cost_treatment  String
+  price_procedure String
+  cost_procedure  String
 
-  @@map("treatments")
+  @@map("procedures")
 }
 
 model PatientTreatment {

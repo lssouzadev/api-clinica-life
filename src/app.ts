@@ -7,7 +7,7 @@ import fastifyJwt from '@fastify/jwt'
 import { env } from './env'
 import { patientRoutes } from './http/controllers/patients/routes'
 import { professionalRoomRoutes } from './http/controllers/professional-rooms/routes'
-import { treatmentRoutes } from './http/controllers/treatments/routes'
+import { procedureRoutes } from './http/controllers/procedures/routes'
 import { roomRoutes } from './http/controllers/rooms/routes'
 import { usersRoutes } from './http/controllers/users/routes'
 
@@ -23,7 +23,7 @@ app.register(professionalRoutes)
 app.register(appointmentRoutes)
 app.register(patientRoutes)
 app.register(professionalRoomRoutes)
-app.register(treatmentRoutes)
+app.register(procedureRoutes)
 app.register(roomRoutes)
 
 app.setErrorHandler((error, _request, reply) => {
