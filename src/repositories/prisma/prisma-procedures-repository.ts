@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, Procedure } from '@prisma/client'
 import { ProceduresRepository } from '../procedures-repository'
 import { prisma } from '@/lib/prisma'
 
@@ -17,5 +17,19 @@ export class PrismaProceduresRepository implements ProceduresRepository {
         id: procedureId,
       },
     })
+  }
+
+  async findById(id: string): Promise<Procedure | null> {
+    const procedure = await prisma.procedure.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!procedure) {
+      return null
+    }
+
+    return procedure
   }
 }

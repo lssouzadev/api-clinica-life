@@ -9,6 +9,7 @@ import { InMemoryProfessionalRoomsRepository } from '@/repositories/in-memory/in
 import { InMemoryProfessionalsRepository } from '@/repositories/in-memory/in-memory-professionals-repository'
 import { InMemoryPatientsRepository } from '@/repositories/in-memory/in-memory-patients-repository'
 import { InMemoryRoomsRepository } from '@/repositories/in-memory/in-memory-rooms-repository'
+import { createRoomPatientProfessionalAndProfessionalRoom } from '@/utils/test/create-room-patient-professional-and-professional-room'
 let professionalsRepository: InMemoryProfessionalsRepository
 let patientsRepository: InMemoryPatientsRepository
 let roomsRepository: InMemoryRoomsRepository
@@ -17,9 +18,11 @@ let appointmentsRepository: InMemoryAppointmentsRepository
 let sut: RegisterAppointmentUseCase
 
 describe('Register Appointment Use Case', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
+    roomsRepository = new InMemoryRoomsRepository()
     professionalsRepository = new InMemoryProfessionalsRepository()
     professionalRoomsRepository = new InMemoryProfessionalRoomsRepository()
+    patientsRepository = new InMemoryPatientsRepository()
     appointmentsRepository = new InMemoryAppointmentsRepository()
     sut = new RegisterAppointmentUseCase(
       appointmentsRepository,
@@ -28,14 +31,15 @@ describe('Register Appointment Use Case', () => {
       roomsRepository,
       patientsRepository,
     )
+    await createRoomPatientProfessionalAndProfessionalRoom({
+      professionalsRepository,
+      professionalRoomsRepository,
+      roomsRepository,
+      patientsRepository,
+    })
   })
 
   it('should be able to register appointment', async () => {
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-01',
-    })
-
     const { appointment } = await sut.execute({
       professionalId: 'professional-01',
       patientId: 'patient-01',
@@ -47,11 +51,6 @@ describe('Register Appointment Use Case', () => {
   })
 
   it('should not be able to register appointment where the minutes are different from thirty or zero', async () => {
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-01',
-    })
-
     await expect(() =>
       sut.execute({
         professionalId: 'professional-01',
@@ -63,16 +62,6 @@ describe('Register Appointment Use Case', () => {
   })
 
   it('should not be able to register two appointments in the same room and time', async () => {
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-01',
-    })
-
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-02',
-      room_id: 'room-01',
-    })
-
     await sut.execute({
       professionalId: 'professional-01',
       patientId: 'patient-01',
@@ -91,16 +80,6 @@ describe('Register Appointment Use Case', () => {
   })
 
   it('should be able to register two appointments in different room but equal time', async () => {
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-01',
-    })
-
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-02',
-      room_id: 'room-02',
-    })
-
     await sut.execute({
       professionalId: 'professional-01',
       patientId: 'patient-01',
@@ -119,16 +98,6 @@ describe('Register Appointment Use Case', () => {
   })
 
   it('should not be able to register two appointments at the same time for a single professional', async () => {
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-01',
-    })
-
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-02',
-    })
-
     await sut.execute({
       professionalId: 'professional-01',
       patientId: 'patient-01',
@@ -147,11 +116,6 @@ describe('Register Appointment Use Case', () => {
   })
 
   it('should not to register appointments outside working hours', async () => {
-    await professionalRoomsRepository.create({
-      professional_id: 'professional-01',
-      room_id: 'room-01',
-    })
-
     await expect(() =>
       sut.execute({
         professionalId: 'professional-01',

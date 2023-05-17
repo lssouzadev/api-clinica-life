@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto'
 
 export class InMemoryRoomsRepository implements RoomsRepository {
   public items: Room[] = []
-  async create(data: Prisma.RoomUncheckedCreateInput) {
+  async create(data: Prisma.RoomCreateInput) {
     const room = {
       id: data.id ?? randomUUID(),
       title: data.title,

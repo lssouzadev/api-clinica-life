@@ -10,7 +10,7 @@ export class InMemoryPatientsRepository implements PatientsRepository {
       id: data.id ?? randomUUID(),
       name: data.name,
       cpf: data.cpf,
-      birthday: data.birthday ?? null,
+      birthday: data.birthday,
       address: data.address ?? null,
       phone: data.phone,
       created_at: new Date(),

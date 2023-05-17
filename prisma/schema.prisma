@@ -38,16 +38,16 @@ model Clinic {
 }
 
 model Patient {
-  id                String             @id @default(uuid())
-  name              String
-  cpf               String             @unique
-  birthday          String
-  address           String?
-  phone             String
-  created_at        DateTime           @default(now())
-  Appointments      Appointment[]
-  PatientTreatments PatientTreatment[]
-  Users             User[]
+  id           String        @id @default(uuid())
+  name         String
+  cpf          String        @unique
+  birthday     String
+  address      String?
+  phone        String
+  created_at   DateTime      @default(now())
+  Appointments Appointment[]
+  Treatmens    Treatment[]
+  Users        User[]
 
   @@map("patients")
 }
@@ -86,7 +86,7 @@ model Professional {
   clinic_id         String
   Appointments      Appointment[]
   ProfessionalRooms ProfessionalRoom[]
-  PatientTreatments PatientTreatment[]
+  Treatments        Treatment[]
   Users             User[]
 
   @@map("professionals")
@@ -104,15 +104,16 @@ model ProfessionalRoom {
 }
 
 model Procedure {
-  id              String @id @default(uuid())
+  id              String      @id @default(uuid())
   title           String
   price_procedure String
   cost_procedure  String
+  Treatment       Treatment[]
 
   @@map("procedures")
 }
 
-model PatientTreatment {
+model Treatment {
   id              String       @id @default(uuid())
   title           String       @unique
   price_treatment String
@@ -120,6 +121,10 @@ model PatientTreatment {
   professional_id String
   patient         Patient      @relation(fields: [patient_id], references: [id])
   patient_id      String
+  procedure       Procedure    @relation(fields: [procedure_id], references: [id])
+  procedure_id    String
+  created_at      DateTime     @default(now())
+  finished_at     DateTime?
 
-  @@map("patient_tratments")
+  @@map("treatments")
 }

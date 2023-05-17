@@ -24,4 +24,14 @@ export class InMemoryProceduresRepository implements ProceduresRepository {
 
     this.items.splice(procedureIndex, 1)
   }
+
+  async findById(id: string) {
+    const procedure = this.items.find((item) => item.id === id)
+
+    if (!procedure) {
+      return null
+    }
+
+    return procedure
+  }
 }
