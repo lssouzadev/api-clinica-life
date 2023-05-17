@@ -4,5 +4,5 @@ build
 .env
 coverage
 .history
-./src/.DS_Store
+.DS_Store
 
