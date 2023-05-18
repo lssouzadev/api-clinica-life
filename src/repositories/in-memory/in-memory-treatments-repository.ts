@@ -30,4 +30,12 @@ export class InMemoryTreatmentsRepository implements TreatmentsRepository {
 
     return treatment
   }
+
+  async findManyByPatientId(patientId: string) {
+    const treatments = this.items.filter(
+      (item) => item.patient_id === patientId,
+    )
+
+    return treatments
+  }
 }
